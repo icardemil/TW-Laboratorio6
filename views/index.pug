@@ -6,19 +6,26 @@ html(lang="es")
         meta( charset='utf-8' )
         meta( http-equiv='X-UA-Compatible', content='IE=edge' )
         meta( name='viewport', content='width=device-width, initial-scale=1.0' )
-        link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+        link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet")
     
     body(style="padding-bottom:10rem;") 
         .container
-            script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
-            script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
+            script( src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' )
+            script( src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' )
             listaSeries= series
             +nav("Documentos en Base de datos", "dropdown_menu")
             div
-                table.table.table-hover
+                table.table.table-bordered
                     thead
                         tr:th
                     tbody
+                        tr
+                            td
+                                strong Nombre
+                            td
+                                strong Temporada
+                            td
+                                strong Año
                         each serie in listaSeries
                             tr
                                 td
@@ -26,4 +33,11 @@ html(lang="es")
                                 td
                                     p #{serie.temporada}
                                 td
-                                    p #{serie.anio}                            
+                                    p #{serie.anio}
+            .alert.alert-success Para insertar un nuevo documento de la BD se debe ingresar a la URL #[strong http://localhost:3000/crear/NOMBRE SERIE/TEMPORADA/AÑO]
+            .alert.alert-info Para leer la información de un documento de la BD se debe ingresar a la URL #[strong http://localhost:3000/leer/NOMBRE SERIE]
+            .alert.alert-warning Para modificar un documento de la BD se debe ingresar a la URL #[strong http://localhost:3000/modificar/NOMBRE ANTIGUO/NOMBRE NUEVO]
+            .alert.alert-danger Para eliminar un documento de la BD se debe ingresar a la URL #[strong http://localhost:3000/eliminar/NOMBRE SERIE]
+            
+                
+                                                          

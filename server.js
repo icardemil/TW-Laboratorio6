@@ -13,6 +13,7 @@ function insertarDB(nomb,temp,año) {
         console.log("Wena");
         var r = yield db.collection('coleccion_anime').insertOne({nombre: nomb, temporada: temp, anio: año});
         assert.equal(1, r.insertedCount);
+        res.send('Documento Creado');
         db.close();
     }).catch(function (err){
         console.log(err.stack);
@@ -26,11 +27,11 @@ function leerBD(nomb,res) {
         var col = db.collection('coleccion_anime');
         col.findOne({nombre: nomb}, function (err,doc) {
             if(doc){
-                res.send('Te encontré >:D ' + doc.nombre +' '+ doc.temporada+' '+ doc.anio);
+                res.send('Información de documento' + doc.nombre +' '+ doc.temporada+' '+ doc.anio);
                 console.log(doc);
             }
             else{
-                res.send("Nel perro");
+                res.send("Documento no existe");
             }
         })
         db.close()
@@ -67,21 +68,17 @@ function obtenerDocumentos(res) {
         var db = yield MongoClient.connect('mongodb://localhost:27017/animeDB');
         var col = db.collection('coleccion_anime');
         var doc = yield col.find({}).toArray();
+        res.render('index', { titulo: 'Documentos', listaSeries: doc});
         console.log(doc);
+        db.close()
     });
 }
 app.get('/', function (req, res) {
-    co( function* () {
-        var db = yield MongoClient.connect('mongodb://localhost:27017/animeDB');
-        var col = db.collection('coleccion_anime');
-        var doc = yield col.find({}).toArray();
-        res.render('index', { titulo: 'Documentos', listaSeries: doc});
-    });
+    obtenerDocumentos(res);
 });
 
 app.get('/crear/:nombre/:temporada/:anio', function (req, res) {
     insertarDB(req.params.nombre,req.params.temporada,req.params.anio);
-        res.send('Documento Creado');
 });
 
 app.get('/leer/:nombre/', function(req, res) {
