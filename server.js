@@ -7,7 +7,7 @@ var MongoClient = require('mongodb').MongoClient,
 app.set('views', './views');
 app.set('view engine', 'pug');
  
-function insertarDB(nomb,temp,año) {
+function insertarDB(nomb,temp,año,res) {
     co( function* (){
         var db = yield MongoClient.connect('mongodb://localhost:27017/animeDB');
         console.log("Wena");
@@ -78,7 +78,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/crear/:nombre/:temporada/:anio', function (req, res) {
-    insertarDB(req.params.nombre,req.params.temporada,req.params.anio);
+    insertarDB(req.params.nombre,req.params.temporada,req.params.anio,res);
 });
 
 app.get('/leer/:nombre/', function(req, res) {

@@ -1,0 +1,10 @@
+1) URL que insertar un documento
+    a) http://localhost:3000/crear/Steins;Gate/Primavera/2018
+    b) http://localhost:3000/crear/Sakurako-San/Otoño/2015
+2) URL que permite leer un documento en específico
+    a) http://localhost:3000/leer/Steins;Gate
+    b) http://localhost:3000/leer/Sakurako-San
+3) URL que permita modificar un documento en específico
+    a) http://localhost:3000/modificar/Sakurako-San/One-PunchMan
+4) URL que permita eliminar un documento específico
+    a) http://localhost:3000/eliminar/Steins;Gate
